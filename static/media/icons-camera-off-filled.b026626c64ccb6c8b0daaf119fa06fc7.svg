@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <clipPath id="lnicnyd25a">
+            <path d="M1368 0v1600H0V0h1368z"/>
+        </clipPath>
+        <clipPath id="qmf7lzrpzb">
+            <path d="m4.301.56.251.221L57.35 53.578a2.667 2.667 0 0 1-3.52 3.993l-.252-.221-11.007-11.008a5.335 5.335 0 0 1-5.238 4.325h-32A5.333 5.333 0 0 1 0 45.333v-32c0-2.6 1.862-4.767 4.325-5.238L.781 4.552A2.667 2.667 0 0 1 4.301.56zM37.333 8a5.333 5.333 0 0 1 5.334 5.333v8l13.927-9.284a1.333 1.333 0 0 1 2.073 1.109v32.35c0 .195-.042.379-.116.545L20.497 8h16.836z"/>
+        </clipPath>
+    </defs>
+    <g clip-path="url(#lnicnyd25a)" transform="translate(-352 -336)">
+        <g clip-path="url(#qmf7lzrpzb)" transform="translate(354.667 338.667)">
+            <path d="M0 0h58.667v58.13H0V0z"/>
+        </g>
+    </g>
+</svg>

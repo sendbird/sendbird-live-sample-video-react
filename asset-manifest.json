@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/sendbird-live-sample-video-react/static/css/main.25b4ce98.css",
+    "main.js": "/sendbird-live-sample-video-react/static/js/main.4b7ee8b0.js",
+    "static/js/539.419585f7.chunk.js": "/sendbird-live-sample-video-react/static/js/539.419585f7.chunk.js",
+    "static/js/932.64e3c61c.chunk.js": "/sendbird-live-sample-video-react/static/js/932.64e3c61c.chunk.js",
+    "static/js/68.edce579f.chunk.js": "/sendbird-live-sample-video-react/static/js/68.edce579f.chunk.js",
+    "static/js/787.41f775f4.chunk.js": "/sendbird-live-sample-video-react/static/js/787.41f775f4.chunk.js",
+    "static/media/BG.png": "/sendbird-live-sample-video-react/static/media/BG.98a87c2ee40557043e24.png",
+    "static/media/img-live-emptystate.png": "/sendbird-live-sample-video-react/static/media/img-live-emptystate.6c4a651be18e1efe70b7.png",
+    "static/media/img-thumbnail-default-1.svg": "/sendbird-live-sample-video-react/static/media/img-thumbnail-default-1.269c6e7ea68cfd34e6886c2d446793bd.svg",
+    "static/media/icons-mic-off-filled.svg": "/sendbird-live-sample-video-react/static/media/icons-mic-off-filled.5260968c2e170f58f8680faa8c90e286.svg",
+    "static/media/icons-live.svg": "/sendbird-live-sample-video-react/static/media/icons-live.67f99c554a780c62d910d4a17d7022aa.svg",
+    "static/media/icons-settings-filled.svg": "/sendbird-live-sample-video-react/static/media/icons-settings-filled.d03ff6bcdfa6340306b764ec8b91058e.svg",
+    "static/media/icons-mic-filled.svg": "/sendbird-live-sample-video-react/static/media/icons-mic-filled.fa7fcbf50ce2fbfe335254469e6b6ae3.svg",
+    "static/media/icons-user.svg": "/sendbird-live-sample-video-react/static/media/icons-user.3614cfc56f7b3dc7afe68eb879ed37fc.svg",
+    "static/media/icons-camera-off-filled.svg": "/sendbird-live-sample-video-react/static/media/icons-camera-off-filled.b026626c64ccb6c8b0daaf119fa06fc7.svg",
+    "static/media/icons-members.svg": "/sendbird-live-sample-video-react/static/media/icons-members.c08df83d36e6ca90d21eb4ab22b43e4d.svg",
+    "index.html": "/sendbird-live-sample-video-react/index.html",
+    "static/media/icons-camera-filled.svg": "/sendbird-live-sample-video-react/static/media/icons-camera-filled.6f58a1bbe649e76320e31089aa9297d4.svg",
+    "static/media/icons-refresh.svg": "/sendbird-live-sample-video-react/static/media/icons-refresh.b8f16b810e6d08d0f96f8f9f879387bc.svg",
+    "static/media/icons-operator.svg": "/sendbird-live-sample-video-react/static/media/icons-operator.246b402663401b4595ca3e1ae0d7408a.svg",
+    "static/media/icons-info.svg": "/sendbird-live-sample-video-react/static/media/icons-info.1e3712dc0955e6b47cea0c04d0bbdc04.svg",
+    "static/media/icons-close.svg": "/sendbird-live-sample-video-react/static/media/icons-close.061d79c9e8d0fe76f5dc944358b6ddcf.svg",
+    "static/media/icons-spinner.svg": "/sendbird-live-sample-video-react/static/media/icons-spinner.a87972b44c61ca05fa996faeb243d0bc.svg",
+    "main.25b4ce98.css.map": "/sendbird-live-sample-video-react/static/css/main.25b4ce98.css.map",
+    "main.4b7ee8b0.js.map": "/sendbird-live-sample-video-react/static/js/main.4b7ee8b0.js.map",
+    "539.419585f7.chunk.js.map": "/sendbird-live-sample-video-react/static/js/539.419585f7.chunk.js.map",
+    "932.64e3c61c.chunk.js.map": "/sendbird-live-sample-video-react/static/js/932.64e3c61c.chunk.js.map",
+    "68.edce579f.chunk.js.map": "/sendbird-live-sample-video-react/static/js/68.edce579f.chunk.js.map",
+    "787.41f775f4.chunk.js.map": "/sendbird-live-sample-video-react/static/js/787.41f775f4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.25b4ce98.css",
+    "static/js/main.4b7ee8b0.js"
+  ]
+}
