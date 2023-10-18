@@ -1,0 +1,42 @@
+.menu__wrapper {
+  position: relative;
+}
+
+.menu__item-wrapper {
+  width: 100%;
+  min-height: 32px;
+  display: block;
+  box-sizing: border-box;
+  text-align: left;
+  justify-content: flex-start;
+  padding: 0 16px;
+  cursor: pointer;
+  min-height: 40px;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  background-color: #fff;
+
+  /* Subtitle/Subtitle 2 */
+  font-family: Roboto;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px; /* 114.286% */
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+.menu__menu-items {
+  position: absolute;
+  top: -60px;
+  right: 0;
+  padding: 8px 0;
+  width: 200px;
+  border-radius: 4px;
+  box-shadow: 0 3px 5px -3px rgba(33, 34, 66, 0.04), 0 3px 14px 2px rgba(33, 34, 66, 0.08), 0 8px 10px 1px rgba(33, 34, 66, 0.12);
+  background-color: var(--white);
+  z-index: 100;
+}

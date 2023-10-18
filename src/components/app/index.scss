@@ -1,0 +1,45 @@
+@import '../../styles/variables';
+
+.sendbirdlive-app__wrapper {
+  display: flex;
+}
+
+.sendbirdlive-app__no-event {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex-grow: 1;
+  width: 100%;
+  @include themed() {
+    background-color: t(bg-1);
+  }
+
+  .sendbirdlive-app__no-event__title {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.88);
+  }
+
+  .sendbirdlive-app__no-event__description {
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.43;
+    color: rgba(0, 0, 0, 0.5);
+  }
+
+  .sendbirdlive-app__no-event__button {
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 1.43;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.88);
+    cursor: pointer;
+    @include themed() {
+      background-color: t(primary-3);
+    }
+  }
+}

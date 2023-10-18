@@ -1,0 +1,144 @@
+@import '../../../styles/variables';
+
+.dark-background {
+  background: var(--sendbird-dark-background-500) !important;
+}
+
+.host-view {
+  display: flex;
+  flex-grow: 1;
+
+  .host-view__main {
+    width: 100%;
+    height: calc(100vh - 118px);
+    background-color: var(--sendbird-dark-background-700);
+
+    .video-wrapper {
+      display: flex;
+      position: relative;
+      width: 100%;
+      align-items: center;
+      justify-content: center;
+
+      .host-view__video {
+        margin: 2px;
+      }
+
+      .host-view__video__cover-image {
+        width: 160px;
+        height: 160px;
+        object-fit: contain;
+      }
+
+      .video-wrapper__rows {
+        display: flex;
+      }
+    }
+
+    .participant-info {
+      display: flex;
+      align-items: center;
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      height: 24px;
+      padding: 2px 8px;
+      background-color: var(--sendbird-dark-overlay-01);
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    .video-wrapper-active {
+      background-image: url("../../../assets/png/BG.png");
+      background-size: cover;
+    }
+
+    .host-view__info {
+      display: flex;
+      padding-top: 16px;
+      background-color: var(--sendbird-dark-background-600);
+
+      .host-view__profile {
+        width: 56px;
+        height: 56px;
+        margin: 0 16px 12px;
+        border-radius: 50%;
+        background-color: var(--sendbird-dark-background-300);
+        overflow: hidden;
+
+        .host-view__profile__cover-image {
+          width: 56px;
+          height: 56px;
+          object-fit: contain;
+        }
+      }
+
+      .host-view__info__wrapper {
+
+        .event-state {
+          width: fit-content;
+          box-sizing: border-box;
+          height: 20px;
+          margin-right: 8px;
+          padding: 4px;
+          border-radius: 2px;
+          font-size: 12px;
+          font-weight: bold;
+          line-height: 1;
+
+          &--created {
+            @extend .event-state;
+            background-color: var(--sendbird-light-primary-100);
+            color: #6211c8;
+          }
+
+          &--ready {
+            @extend .event-state;
+            background-color: #c8d9fa;
+            color: #30308f;
+          }
+
+          &--ongoing {
+            @extend .event-state;
+            background-color: var(--sendbird-light-error-300);
+            color: rgba(255, 255, 255, 0.88);
+          }
+
+          &--ended {
+            @extend .event-state;
+            @include themed() {
+              background-color: t(bg-2);
+            }
+            color: rgba(0, 0, 0, 0.5);
+          }
+        }
+
+        .host-view__title__wrapper {
+          display: flex;
+          align-items: center;
+
+          .host-view__title {
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.43;
+            color: rgba(255, 255, 255, 0.88);
+          }
+        }
+
+        .host-view__detail {
+          margin-top: 4px;
+          font-size: 14px;
+          line-height: 1.43;
+          color: rgba(255, 255, 255, 0.5);
+        }
+
+        .host-view__host-name {
+          margin-top: 16px;
+          font-size: 14px;
+          font-weight: 700;
+          line-height: 1.43;
+          color: rgba(255, 255, 255, 0.88);
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,113 @@
+@import '../../../../styles/variables';
+
+.dark-background__screen-share {
+  background: var(--sendbird-dark-background-500) !important;
+}
+
+.control-bar {
+  display: flex;
+  align-items: center;
+  background-color: var(--sendbird-dark-background-600);
+
+  .control-bar__left-buttons {
+    display: flex;
+    margin-left: 16px;
+
+    .control-bar__settings {
+      width: 22px;
+      height: 22px;
+      margin: 12px 27px 12px 0;
+      cursor: pointer;
+    }
+
+    .control-bar__video {
+      width: 22px;
+      height: 22px;
+      margin: 12px 27px 12px 0;
+      cursor: pointer;
+    }
+
+    .control-bar__audio__wrapper {
+      display: flex;
+      margin: 12px 27px 12px 0;
+
+      .control-bar__audio {
+        margin-right: 27px;
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+      }
+    }
+
+    .control-bar__screen-share {
+      display: flex;
+      height: 22px;
+      margin: 12px 27px 0 0;
+      cursor: pointer;
+
+      svg {
+        margin-right: 27px;
+      }
+
+      .control-bar__screen-share__stop {
+        display: flex;
+        box-sizing: border-box;
+        flex-direction: column;
+        align-items: center;
+        padding: 6px 16px;
+
+        width: 160px;
+        height: 32px;
+
+        border: 1px solid rgba(255, 255, 255, 0.38);
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 20px;
+        color: #FFFFFF;
+      }
+    }
+  }
+
+  .control-bar__right-buttons {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 16px;
+
+    .participant-icon {
+      width: 8px;
+      height: 8px;
+      margin: 0 4px;
+      border-radius: 50%;
+
+      &--red {
+        @extend .participant-icon;
+        background-color: var(--sendbird-dark-error-300);
+      }
+    }
+
+    .control-bar__duration {
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.88);
+    }
+
+    %control-bar__button {
+      padding: 6px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      color: rgba(0, 0, 0, 0.88);
+      cursor: pointer;
+    }
+
+    .control-bar__end-live {
+      @extend %control-bar__button;
+      background-color: var(--sendbird-dark-primary-200);
+    }
+
+    .control-bar__start-live {
+      @extend %control-bar__button;
+      background-color: var(--sendbird-dark-error-200);
+    }
+  }
+}

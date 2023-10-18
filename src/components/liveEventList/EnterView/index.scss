@@ -1,0 +1,38 @@
+.enter-view {
+  width: 480px;
+
+  .title {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 26px;
+  }
+
+  .close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+  }
+
+  .enter-view__item {
+    display: flex;
+    align-items: center;
+    margin: 8px 0;
+    border-radius: 4px;
+    border: solid 1px rgba(0, 0, 0, 0.12);
+    padding: 22px 24px 22px 22px;
+    cursor: pointer;
+
+    .enter-view__item__icon {
+      width: 28px;
+      height: 28px;
+      margin-right: 22px;
+    }
+
+    .enter-view__item__text {
+      font-size: 16px;
+      line-height: 1.38;
+      color: rgba(0, 0, 0, 0.88);
+    }
+  }
+}

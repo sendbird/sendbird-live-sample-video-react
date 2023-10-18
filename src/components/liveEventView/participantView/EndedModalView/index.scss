@@ -1,0 +1,49 @@
+@import '../../../../styles/variables';
+
+.ended-modal {
+  width: 480px;
+  padding: 18px 24px;
+
+  .header {
+    display: flex;
+    align-items: center;
+
+    .title {
+      flex: 1;
+      font-size: 20px;
+      font-weight: 700;
+      line-height: 1.4;
+      color: rgba(0, 0, 0, 0.88);
+    }
+
+    .close:hover {
+      cursor: pointer;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding-top: 50px;
+
+    %button {
+      margin-left: 8px;
+      padding: 10px 16px;
+      border-radius: 4px;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+    }
+
+    .major-button {
+      @extend %button;
+      @include themed() {
+        background-color: t(primary-3);
+      }
+      color: rgba(255, 255, 255, 0.88);
+    }
+  }
+}
