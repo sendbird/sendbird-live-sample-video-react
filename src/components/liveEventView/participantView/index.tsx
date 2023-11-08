@@ -118,7 +118,8 @@ export default function ParticipantView(props: ParticipantViewProps) {
   }, [hosts, state]);
 
   useEffect(() => {
-    if (liveEvent.state === LiveEventState.CREATED) {
+    if (liveEvent.state === LiveEventState.CREATED
+    || liveEvent.state === LiveEventState.READY) {
       notify('Live event will begin soon.');
     }
 
@@ -161,7 +162,7 @@ export default function ParticipantView(props: ParticipantViewProps) {
         setTitle(liveEvent.title);
         setCoverUrl(liveEvent.coverUrl);
       }),
-      liveEvent.on('disconnected', () => {
+      liveEvent.on('exited', () => {
         onClose(liveEvent);
       }),
     ];

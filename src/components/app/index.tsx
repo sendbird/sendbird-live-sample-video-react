@@ -60,7 +60,10 @@ export default function App(props: AppProps) {
       try {
         const event = await SendbirdLive.getLiveEvent(liveEvent.liveEventId);
 
-        if (event.state === LiveEventState.ENDED) {
+        if (
+          (event.state === LiveEventState.CREATED && !(event.isHost))
+          ||event.state === LiveEventState.ENDED
+        ) {
           openEnterErrorModal();
           return;
         }
@@ -98,7 +101,7 @@ export default function App(props: AppProps) {
 
     return (
       (isHost)
-        ? <HostView liveEvent={liveEvent} onClose={onClose} />
+        ? <HostView liveEvent={liveEvent} userId={userId} onClose={onClose} />
         : <ParticipantView liveEvent={liveEvent} onClose={onClose}/>
     );
   };

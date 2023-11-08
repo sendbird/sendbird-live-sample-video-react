@@ -14,12 +14,14 @@ const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent
 
 interface HostViewProps {
   liveEvent: LiveEvent;
+  userId: string;
   onClose: (liveEvent?: LiveEvent) => void;
 }
 
 export default function HostView(props: HostViewProps) {
   const {
     liveEvent,
+    userId,
     onClose,
   } = props;
 
@@ -117,7 +119,7 @@ export default function HostView(props: HostViewProps) {
         setTitle(liveEvent.title);
         setCoverUrl(liveEvent.coverUrl);
       }),
-      liveEvent.on('disconnected', () => {
+      liveEvent.on('exited', () => {
         onClose(liveEvent);
       }),
       liveEvent.on('hostEntered', () => {
@@ -180,11 +182,15 @@ export default function HostView(props: HostViewProps) {
 
                   return (
                     <div style={{ ...videoStyle, position: 'relative' }}>
-                      <video key={host.hostId} style={videoStyle} autoPlay playsInline className="host-view__video" ref={el => {
-                        if (!el) return;
+                      <video key={`${i}${j}`} style={videoStyle} autoPlay playsInline className="host-view__video" ref={el => {
+                        if (!el || !host) return;
                         liveEvent.setMediaViewForLiveEvent(el, host.hostId);
+                        if (host.userId === userId) el.muted = true;
                       }}/>
-                      <div className="participant-info">{host.userId}</div>
+                      <div className="participant-info" ref={el => {
+                        if (!el || !host) return;
+                        el.textContent = host.userId;
+                      }}></div>
                     </div>
                   )
                 })}

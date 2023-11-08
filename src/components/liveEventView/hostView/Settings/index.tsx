@@ -63,7 +63,7 @@ export default function Settings(props: SettingsProps) {
         <div className="settings__select-label">Camera</div>
         <select
           id="camera-select"
-          value={currentVideoInput?.deviceId}
+          defaultValue={currentVideoInput?.deviceId}
           className="settings__select-button"
           onChange={e => {
             const { value } = e.target;
@@ -81,7 +81,7 @@ export default function Settings(props: SettingsProps) {
         <div className="settings__select-label">Microphone</div>
         <select
           id="microphone-select"
-          value={currentAudioInput?.deviceId}
+          defaultValue={currentAudioInput?.deviceId}
           className="settings__select-button"
           onChange={e => {
             const { value } = e.target;
