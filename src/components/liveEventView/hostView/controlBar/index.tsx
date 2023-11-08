@@ -9,7 +9,6 @@ import { ReactComponent as CameraOffIcon } from '../../../../assets/svg/icons-ca
 import './index.scss';
 import { SendbirdLiveContext } from "../../../../lib/sendbirdLiveContext";
 import Duration from "./Duration";
-import useModal from "../../../../hooks/useModal";
 
 interface ControlBarProps {
   liveEvent: LiveEvent;
@@ -33,7 +32,7 @@ export default function ControlBar(props: ControlBarProps) {
   const { stringSet } = useContext(SendbirdLiveContext);
 
   const startLiveEvent = async () => {
-    await liveEvent.startEvent({ turnAudioOn: true, turnVideoOn: true });
+    await liveEvent.startEvent({ turnAudioOn: audio, turnVideoOn: video });
     setOngoing(true);
     onStart(liveEvent);
   }

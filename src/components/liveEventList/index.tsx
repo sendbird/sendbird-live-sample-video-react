@@ -37,7 +37,7 @@ export default function LiveEventList(props: LiveEventListProps) {
 
   const { stringSet, userId, nickname } = useContext(SendbirdLiveContext);
 
-  const params = queryParams || { limit: 20, hostTypes: [] };
+  const params = queryParams || { limit: 20 };
   const [query, setQuery] = useState<LiveEventListQuery>(SendbirdLive.createLiveEventListQuery(params));
 
   const liveEventList = useRef<HTMLDivElement>(null);
