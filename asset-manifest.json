@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/sendbird-live-sample-video-react/static/css/main.450d3328.css",
-    "main.js": "/sendbird-live-sample-video-react/static/js/main.1feb82c2.js",
+    "main.css": "/sendbird-live-sample-video-react/static/css/main.73a51317.css",
+    "main.js": "/sendbird-live-sample-video-react/static/js/main.4edcc1e4.js",
     "static/js/539.419585f7.chunk.js": "/sendbird-live-sample-video-react/static/js/539.419585f7.chunk.js",
     "static/js/932.64e3c61c.chunk.js": "/sendbird-live-sample-video-react/static/js/932.64e3c61c.chunk.js",
     "static/js/68.edce579f.chunk.js": "/sendbird-live-sample-video-react/static/js/68.edce579f.chunk.js",
@@ -23,15 +23,15 @@
     "static/media/icons-info.svg": "/sendbird-live-sample-video-react/static/media/icons-info.1e3712dc0955e6b47cea0c04d0bbdc04.svg",
     "static/media/icons-close.svg": "/sendbird-live-sample-video-react/static/media/icons-close.061d79c9e8d0fe76f5dc944358b6ddcf.svg",
     "static/media/icons-spinner.svg": "/sendbird-live-sample-video-react/static/media/icons-spinner.a87972b44c61ca05fa996faeb243d0bc.svg",
-    "main.450d3328.css.map": "/sendbird-live-sample-video-react/static/css/main.450d3328.css.map",
-    "main.1feb82c2.js.map": "/sendbird-live-sample-video-react/static/js/main.1feb82c2.js.map",
+    "main.73a51317.css.map": "/sendbird-live-sample-video-react/static/css/main.73a51317.css.map",
+    "main.4edcc1e4.js.map": "/sendbird-live-sample-video-react/static/js/main.4edcc1e4.js.map",
     "539.419585f7.chunk.js.map": "/sendbird-live-sample-video-react/static/js/539.419585f7.chunk.js.map",
     "932.64e3c61c.chunk.js.map": "/sendbird-live-sample-video-react/static/js/932.64e3c61c.chunk.js.map",
     "68.edce579f.chunk.js.map": "/sendbird-live-sample-video-react/static/js/68.edce579f.chunk.js.map",
     "787.41f775f4.chunk.js.map": "/sendbird-live-sample-video-react/static/js/787.41f775f4.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.450d3328.css",
-    "static/js/main.1feb82c2.js"
+    "static/css/main.73a51317.css",
+    "static/js/main.4edcc1e4.js"
   ]
 }
