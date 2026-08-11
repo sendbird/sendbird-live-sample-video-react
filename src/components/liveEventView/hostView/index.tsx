@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { LiveEvent, LiveEventState } from "@sendbird/live";
 
 import './index.scss';
@@ -6,11 +6,8 @@ import { ReactComponent as IconUser } from "../../../assets/svg/icons-user.svg";
 import ControlBar from './controlBar';
 import useModal from "../../../hooks/useModal";
 import ConfirmEndDialog from "../../ConfirmEndDialog";
-import RightPanel from '../../RightPanel';
 import { SendbirdLiveContext } from "../../../lib/sendbirdLiveContext";
 import Settings from "./Settings";
-
-const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 interface HostViewProps {
   liveEvent: LiveEvent;
@@ -26,7 +23,6 @@ export default function HostView(props: HostViewProps) {
   } = props;
 
 
-  const video = useRef<HTMLVideoElement>(null);
   const [hosts, setHosts] = useState(liveEvent.hosts);
   const [title, setTitle] = useState(liveEvent.title);
   const [coverUrl, setCoverUrl] = useState(liveEvent.coverUrl);
@@ -151,6 +147,10 @@ export default function HostView(props: HostViewProps) {
     return () => {
       unsubscribers.map(unsubscriber => unsubscriber());
     }
+    // The parent passes `onClose` as an inline arrow, so it gets a new identity on every render.
+    // Including it would tear down and re-register every liveEvent listener on each render;
+    // re-subscribing only when `liveEvent` changes is intentional.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [liveEvent]);
 
 
@@ -202,7 +202,7 @@ export default function HostView(props: HostViewProps) {
           <div className="host-view__profile">
             {
               (liveEvent.coverUrl) ?
-                <img src={coverUrl} alt='cover image' className='host-view__profile__cover-image' /> :
+                <img src={coverUrl} alt='Event cover' className='host-view__profile__cover-image' /> :
                 <IconUser viewBox='-4 -4 20 20' width={56} height={56} />
             }
           </div>

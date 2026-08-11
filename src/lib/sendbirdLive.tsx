@@ -24,11 +24,6 @@ export default function SendbirdLive(props: sendbirdLiveProps) {
     appId,
     nickname,
     accessToken,
-    signOut,
-    customApiHost,
-    customWebSocketHost,
-    children,
-    theme,
     colorSet,
     stringSet,
   } = props;

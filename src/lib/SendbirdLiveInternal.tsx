@@ -60,6 +60,9 @@ export default function SendbirdLiveInternal(props: SendbirdLiveInternalProps) {
     }
 
     doInit();
+    // `sdkInit` already gates initialization. Adding `sdk` would re-run `init()` whenever the SDK
+    // instance identity changes, which is not intended.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [userId, appId, accessToken, sdkInit])
 
   return (

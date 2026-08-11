@@ -51,6 +51,9 @@ export default function EventHostSearchInput({
       setError(false);
       setMessage('');
     }
+    // `maxHostLength` is a mount-constant prop (no caller overrides its default), so re-validating
+    // only when the selection changes is intentional.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedUsers]);
 
   const search = (searchType: string, keyword: string) => {

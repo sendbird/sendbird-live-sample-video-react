@@ -19,6 +19,9 @@ export const useOnClickOutside = (handler: () => void) => {
       // @ts-ignore
       document.removeEventListener('mousedown', handleClickOutside);
     };
+    // Callers pass `handler` as an inline arrow, so it gets a new identity on every render.
+    // Including it would re-register the mousedown listener each render; subscribing once is intentional.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ref]);
   return ref;
 };

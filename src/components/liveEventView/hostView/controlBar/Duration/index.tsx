@@ -14,6 +14,9 @@ export default function Duration(props: { liveEvent: LiveEvent }) {
     }, 1000);
 
     return () => clearInterval(interval);
+    // The interval reads `liveEvent.duration` fresh on every tick. Including it would recreate the
+    // interval once per second; setting it up once on mount is intentional.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   function padTo2Digits(num: number) {

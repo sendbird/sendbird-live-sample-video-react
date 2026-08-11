@@ -25,6 +25,9 @@ export default function EnterErrorView(props: EnterErrorViewProps) {
       console.log(liveEvent);
       return stringSet.UNKNOWN_ERROR_ALERT_DESCRIPTION;
     }
+    // `stringSet` comes from context and is fixed for the session; recomputing only on `liveEvent`
+    // change is intentional.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [liveEvent]);
 
   return (

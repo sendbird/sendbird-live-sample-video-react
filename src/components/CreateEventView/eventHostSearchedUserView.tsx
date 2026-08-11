@@ -19,7 +19,7 @@ export default function EventHostSearchedUserView({
   onClick = () => {},
 }: Props): ReactElement {
   const profile = profileUrl ?
-    <img src={profileUrl} className='profile-image' /> :
+    <img src={profileUrl} alt={nickname || userId} className='profile-image' /> :
     <IconUser fill='#fff' className='profile-image' />;
   return <div className='searched-user' onClick={() => onClick()}>
     {profile}
