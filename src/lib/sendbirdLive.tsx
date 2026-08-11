@@ -24,11 +24,15 @@ export default function SendbirdLive(props: sendbirdLiveProps) {
     appId,
     nickname,
     accessToken,
+    /* These are not read here — they reach SendbirdLiveInternal through the {...props} spread below.
+       Kept destructured so the sample shows the full set of props this provider accepts. */
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     signOut,
     customApiHost,
     customWebSocketHost,
     children,
     theme,
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     colorSet,
     stringSet,
   } = props;

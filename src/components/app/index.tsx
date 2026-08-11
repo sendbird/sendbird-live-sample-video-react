@@ -92,7 +92,7 @@ export default function App(props: AppProps) {
   const LiveEventView = ({ onClose }: { onClose: (liveEvent?: LiveEvent) => void }) => {
     if (!liveEvent) return (
       <div className="sendbirdlive-app__no-event">
-        <img src={emptyState} className="sendbirdlive-app__no-event-img"/>
+        <img src={emptyState} alt="" className="sendbirdlive-app__no-event-img"/>
         <div className="sendbirdlive-app__no-event__title">No live events selected</div>
         <div className="sendbirdlive-app__no-event__description">Select a live event from the list or create a live event.</div>
         <div className="sendbirdlive-app__no-event__button" onClick={openCreateEventModal}>Create</div>

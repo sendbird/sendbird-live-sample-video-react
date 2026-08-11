@@ -25,7 +25,7 @@ export default function EventHostView({
   onRemove = () => {},
 }: EventHostViewProps): ReactElement {
   const profile = profileUrl ?
-    <img src={profileUrl} className='profile-image' /> :
+    <img src={profileUrl} alt={nickname || userId} className='profile-image' /> :
     <UserIcon fill='#ccc' className='profile-image' />;
   return <div className='event-host' key={key}>
     {!hideProfile ? profile : null}

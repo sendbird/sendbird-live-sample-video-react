@@ -22,6 +22,9 @@ export default function Settings(props: SettingsProps) {
 
   const mediaAccess = SendbirdLive.useMedia({ audio: true, video: true });
 
+  // Intentionally left without a dependency array: adding one would change when devices are
+  // enumerated and when `mediaAccess.dispose()` runs. Revisit separately (see follow-up F-2).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
 
     setAudioInputs(SendbirdLive.getAvailableAudioInputDevices());

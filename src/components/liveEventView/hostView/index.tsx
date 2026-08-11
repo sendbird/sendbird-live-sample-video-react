@@ -6,10 +6,14 @@ import { ReactComponent as IconUser } from "../../../assets/svg/icons-user.svg";
 import ControlBar from './controlBar';
 import useModal from "../../../hooks/useModal";
 import ConfirmEndDialog from "../../ConfirmEndDialog";
+// Kept for the commented-out <RightPanel> at the bottom of this file.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import RightPanel from '../../RightPanel';
 import { SendbirdLiveContext } from "../../../lib/sendbirdLiveContext";
 import Settings from "./Settings";
 
+// Kept as a sample reference for browser detection.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 interface HostViewProps {
@@ -26,6 +30,9 @@ export default function HostView(props: HostViewProps) {
   } = props;
 
 
+  // Not attached to anything — the <video> elements below use inline callback refs.
+  // Kept as a sample reference for the ref-based approach.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const video = useRef<HTMLVideoElement>(null);
   const [hosts, setHosts] = useState(liveEvent.hosts);
   const [title, setTitle] = useState(liveEvent.title);
@@ -151,6 +158,10 @@ export default function HostView(props: HostViewProps) {
     return () => {
       unsubscribers.map(unsubscriber => unsubscriber());
     }
+    // The parent passes `onClose` as an inline arrow, so it gets a new identity on every render.
+    // Including it would tear down and re-register every liveEvent listener on each render;
+    // re-subscribing only when `liveEvent` changes is intentional.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [liveEvent]);
 
 
@@ -202,7 +213,7 @@ export default function HostView(props: HostViewProps) {
           <div className="host-view__profile">
             {
               (liveEvent.coverUrl) ?
-                <img src={coverUrl} alt='cover image' className='host-view__profile__cover-image' /> :
+                <img src={coverUrl} alt='Event cover' className='host-view__profile__cover-image' /> :
                 <IconUser viewBox='-4 -4 20 20' width={56} height={56} />
             }
           </div>

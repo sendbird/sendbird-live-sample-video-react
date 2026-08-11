@@ -45,6 +45,9 @@ export default function CreateEventView({
         setInitialHostUsers([sb.currentUser]);
       }
     }
+    // `showUserIdsForHostSelectionView` is a mount-time flag; this effect is meant to fire only when
+    // the SDK resolves `currentUser`, not when the flag is re-evaluated.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sb?.currentUser]);
 
   const [hostUserIds, setHostUserIds] = useState(initialHostUsers.map(user => user.userId));
@@ -67,7 +70,7 @@ export default function CreateEventView({
       <div className='cover-image-container' ref={coverImage}>
         {!coverImagePath ?
           <LiveIcon viewBox='0 0 64 64' width={32} height={32} fill='#fff' /> :
-          <img src={coverImagePath} alt='Cover image' className='cover-image' />}
+          <img src={coverImagePath} alt='Event cover' className='cover-image' />}
       </div>
       <input type='file'
         className='cover-image-file'

@@ -39,6 +39,9 @@ export default function EventHostTextInput({
       setError(false);
       setMessage('If the ACL attributes are turned on, you can access user list information from the SDK.');
     }
+    // `maxHostLength` is a mount-constant prop (no caller overrides its default), so re-validating
+    // only when the selection changes is intentional.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedUserIds]);
 
   return <div className='event-host-form'>

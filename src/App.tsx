@@ -23,7 +23,7 @@ function SampleApp() {
             signOut={() => setHasSession(false)}
           /> :
           <div className="login-panel">
-            <img src={logo} className="logo" />
+            <img src={logo} alt="Sendbird" className="logo" />
             <div className='login-form'>
               <div className='section'>Application ID</div>
               <input type='text' className='input'
@@ -43,7 +43,7 @@ function SampleApp() {
               <input type='button' className='submit' value='Sign in'
                      onClick={() => setHasSession(true)}/>
             </div>
-            <img src={logoB} className="logo-horizontal" />
+            <img src={logoB} alt="" className="logo-horizontal" />
           </div>
       }
     </div>

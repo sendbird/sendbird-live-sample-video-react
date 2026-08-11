@@ -80,6 +80,9 @@ export default function LiveEventList(props: LiveEventListProps) {
 
   useEffect(() => {
     refresh();
+    // `refresh` is redefined on every render, so including it would refetch the list on every render.
+    // Refreshing only when `queryParams` changes is intentional.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryParams])
 
   return (

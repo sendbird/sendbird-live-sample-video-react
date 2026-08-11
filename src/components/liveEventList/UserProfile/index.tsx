@@ -28,7 +28,7 @@ export default function UserProfile(props: UserProfileProps) {
       <div className="user-profile__avatar">
         {
           profileUrl ?
-            <img src={profileUrl} /> :
+            <img src={profileUrl} alt={nickname ?? userId ?? ''} /> :
             <IconUser fill='#fff' width={32} height={32}  />
         }
       </div>
