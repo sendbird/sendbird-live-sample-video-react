@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { LiveEvent, LiveEventState } from "@sendbird/live";
 
 import './index.scss';
@@ -6,8 +6,15 @@ import { ReactComponent as IconUser } from "../../../assets/svg/icons-user.svg";
 import ControlBar from './controlBar';
 import useModal from "../../../hooks/useModal";
 import ConfirmEndDialog from "../../ConfirmEndDialog";
+// Kept for the commented-out <RightPanel> at the bottom of this file.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import RightPanel from '../../RightPanel';
 import { SendbirdLiveContext } from "../../../lib/sendbirdLiveContext";
 import Settings from "./Settings";
+
+// Kept as a sample reference for browser detection.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 interface HostViewProps {
   liveEvent: LiveEvent;
@@ -23,6 +30,10 @@ export default function HostView(props: HostViewProps) {
   } = props;
 
 
+  // Not attached to anything — the <video> elements below use inline callback refs.
+  // Kept as a sample reference for the ref-based approach.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const video = useRef<HTMLVideoElement>(null);
   const [hosts, setHosts] = useState(liveEvent.hosts);
   const [title, setTitle] = useState(liveEvent.title);
   const [coverUrl, setCoverUrl] = useState(liveEvent.coverUrl);

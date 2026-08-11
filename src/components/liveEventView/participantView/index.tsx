@@ -1,12 +1,19 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { LiveEvent, LiveEventState } from "@sendbird/live";
 
 import './index.scss';
 import { ReactComponent as IconUser } from "../../../assets/svg/icons-user.svg";
 import { useToast } from './Toast';
+// Kept for the commented-out <RightPanel> at the bottom of this file.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import RightPanel from "../../RightPanel";
 import useModal from "../../../hooks/useModal";
 import EndedModalView from "./EndedModalView";
 import { SendbirdLiveContext } from "../../../lib/sendbirdLiveContext";
+
+// Kept as a sample reference for browser detection.
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const isSafari = () => /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
 interface OnEndEventClickedProps {
   onClick: () => void;
@@ -26,10 +33,23 @@ export default function ParticipantView(props: ParticipantViewProps) {
   const {
     liveEvent,
     onClose,
+    /* Not read yet — kept destructured so the sample shows the full set of props
+       declared on ParticipantViewProps. */
+    /* eslint-disable @typescript-eslint/no-unused-vars */
+    showDuration,
+    onEndEventClick,
+    showStatusLabel,
+    showParticipantCount,
+    /* eslint-enable @typescript-eslint/no-unused-vars */
     eventEndViewDisplayTime,
   } = props;
 
-  const [Toast, notify] = useToast();
+  // Not attached to anything — the <video> elements below use inline callback refs.
+  // Kept as a sample reference for the ref-based approach.
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const video = useRef<HTMLVideoElement>(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [Toast, notify, reset] = useToast();
   const [hosts, setHosts] = useState(liveEvent.hosts);
   const [title, setTitle] = useState(liveEvent.title);
   const [coverUrl, setCoverUrl] = useState(liveEvent.coverUrl);
