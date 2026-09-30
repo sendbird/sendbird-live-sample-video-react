@@ -42,6 +42,8 @@ export default function HostView(props: HostViewProps) {
   const [ready, setReady] = useState(false);
   // Counts in-flight setup runs; StrictMode replays the mount effect, so two can overlap.
   const pendingSetups = useRef(0);
+  const [exiting, setExiting] = useState(false);
+  const exitingRef = useRef(false);
   const [EndModal, openEndModal, closeEndModal] = useModal('', 'dark-background');
   const [SettingsModal, openSettingsModal, closeSettingsModal] = useModal('');
 
@@ -240,6 +242,7 @@ export default function HostView(props: HostViewProps) {
         <ControlBar
           liveEvent={liveEvent}
           exitDisabled={!ready}
+          exiting={exiting}
           onStart={(liveEvent) => {
             setHosts([...liveEvent.hosts]);
             setState(liveEvent.state);
@@ -248,7 +251,17 @@ export default function HostView(props: HostViewProps) {
             openEndModal();
           }}
           onExit={async () => {
-            await liveEvent.exitAsHost();
+            // Block repeated Exit and Start while exitAsHost() is in flight; re-enable only if it fails.
+            if (exitingRef.current) return;
+            exitingRef.current = true;
+            setExiting(true);
+            try {
+              await liveEvent.exitAsHost();
+            } catch (e) {
+              exitingRef.current = false;
+              setExiting(false);
+              throw e;
+            }
             onClose(liveEvent);
           }}
           onSettings={() => {

@@ -13,6 +13,7 @@ import Duration from "./Duration";
 interface ControlBarProps {
   liveEvent: LiveEvent;
   exitDisabled: boolean;
+  exiting: boolean;
   onStart: (liveEvent: LiveEvent) => void;
   onEnd: (liveEvent: LiveEvent) => void;
   onExit: (liveEvent: LiveEvent) => void;
@@ -23,6 +24,7 @@ export default function ControlBar(props: ControlBarProps) {
   const {
     liveEvent,
     exitDisabled,
+    exiting,
     onStart,
     onEnd,
     onExit,
@@ -39,7 +41,7 @@ export default function ControlBar(props: ControlBarProps) {
 
   const startLiveEvent = async () => {
     // Ignore re-entry (e.g. double-click) so one request settling can't re-enable Exit while another is pending.
-    if (startingRef.current) return;
+    if (startingRef.current || exiting) return;
     startingRef.current = true;
     setStarting(true);
     try {
@@ -52,7 +54,7 @@ export default function ControlBar(props: ControlBarProps) {
     }
   }
 
-  const canExit = !exitDisabled && !starting;
+  const canExit = !exitDisabled && !starting && !exiting;
 
   const toggleVideo = (on: boolean) => {
     on ? liveEvent.startVideo() : liveEvent.stopVideo();
@@ -120,7 +122,7 @@ export default function ControlBar(props: ControlBarProps) {
         {
           ongoing
             ? <div className="control-bar__end-live" onClick={() => { onEnd(liveEvent) }}>{stringSet.LIVE_EVENT_END_DIALOG_OPTION_END}</div>
-            : <div className="control-bar__start-live" onClick={startLiveEvent}>{stringSet.START_LIVE_EVENT_HEADER_BUTTON}</div>
+            : <div className={`control-bar__start-live${exiting ? ' control-bar__start-live--disabled' : ''}`} onClick={startLiveEvent}>{stringSet.START_LIVE_EVENT_HEADER_BUTTON}</div>
         }
       </div>
     </div>
