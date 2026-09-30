@@ -1,5 +1,5 @@
 import { LiveEvent, LiveEventState } from "@sendbird/live";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { ReactComponent as SettingsIcon } from '../../../../assets/svg/icons-settings-filled.svg';
 import { ReactComponent as MicIcon } from '../../../../assets/svg/icons-mic-filled.svg';
 import { ReactComponent as MicOffIcon } from '../../../../assets/svg/icons-mic-off-filled.svg';
@@ -12,6 +12,7 @@ import Duration from "./Duration";
 
 interface ControlBarProps {
   liveEvent: LiveEvent;
+  exitDisabled: boolean;
   onStart: (liveEvent: LiveEvent) => void;
   onEnd: (liveEvent: LiveEvent) => void;
   onExit: (liveEvent: LiveEvent) => void;
@@ -21,6 +22,7 @@ interface ControlBarProps {
 export default function ControlBar(props: ControlBarProps) {
   const {
     liveEvent,
+    exitDisabled,
     onStart,
     onEnd,
     onExit,
@@ -30,14 +32,27 @@ export default function ControlBar(props: ControlBarProps) {
   const [ongoing, setOngoing] = useState(liveEvent.state === LiveEventState.ONGOING);
   const [audio, setAudio] = useState(true);
   const [video, setVideo] = useState(true);
+  const [starting, setStarting] = useState(false);
+  const startingRef = useRef(false);
 
   const { stringSet } = useContext(SendbirdLiveContext);
 
   const startLiveEvent = async () => {
-    await liveEvent.startEvent({ turnAudioOn: audio, turnVideoOn: video });
-    setOngoing(true);
-    onStart(liveEvent);
+    // Ignore re-entry (e.g. double-click) so one request settling can't re-enable Exit while another is pending.
+    if (startingRef.current) return;
+    startingRef.current = true;
+    setStarting(true);
+    try {
+      await liveEvent.startEvent({ turnAudioOn: audio, turnVideoOn: video });
+      setOngoing(true);
+      onStart(liveEvent);
+    } finally {
+      startingRef.current = false;
+      setStarting(false);
+    }
   }
+
+  const canExit = !exitDisabled && !starting;
 
   const toggleVideo = (on: boolean) => {
     on ? liveEvent.startVideo() : liveEvent.stopVideo();
@@ -93,7 +108,14 @@ export default function ControlBar(props: ControlBarProps) {
           ongoing && <Duration liveEvent={liveEvent} />
         }
         {
-          !ongoing && <div className="control-bar__exit-live" onClick={() => { onExit(liveEvent) }}>{stringSet.LIVE_EVENT_EXIT_BUTTON}</div>
+          !ongoing && (
+            <div
+              className={`control-bar__exit-live${canExit ? '' : ' control-bar__exit-live--disabled'}`}
+              onClick={() => { if (canExit) onExit(liveEvent) }}
+            >
+              {stringSet.LIVE_EVENT_EXIT_BUTTON}
+            </div>
+          )
         }
         {
           ongoing

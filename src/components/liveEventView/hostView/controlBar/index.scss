@@ -115,6 +115,11 @@
       margin-right: 8px;
       border: 1px solid rgba(255, 255, 255, 0.38);
       color: rgba(255, 255, 255, 0.88);
+
+      &--disabled {
+        opacity: 0.38;
+        cursor: default;
+      }
     }
   }
 }
