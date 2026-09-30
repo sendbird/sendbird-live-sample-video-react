@@ -235,6 +235,10 @@ export default function HostView(props: HostViewProps) {
           onEnd={() => {
             openEndModal();
           }}
+          onExit={async () => {
+            await liveEvent.exitAsHost();
+            onClose(liveEvent);
+          }}
           onSettings={() => {
             openSettingsModal();
           }}

@@ -73,6 +73,7 @@ export const getStringSet = () => {
     LIVE_EVENT_END_DIALOG_DESCRIPTION: 'Do you want to end this live event?',
     LIVE_EVENT_END_DIALOG_OPTION_END: 'End live event',
     LIVE_EVENT_END_DIALOG_OPTION_EXIT: 'Exit without ending',
+    LIVE_EVENT_EXIT_BUTTON: 'Exit',
     TOTAL_PARTICIPANTS_COUNT: 'Total participants',
     LIVE_EVENT_SUMMARY_DIALOG_TITLE: 'Live event ended',
     PEAK_CONCURRENT_PARTICIPANTS_COUNT: 'Peak concurrent participants',

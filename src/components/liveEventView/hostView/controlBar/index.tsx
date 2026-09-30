@@ -14,6 +14,7 @@ interface ControlBarProps {
   liveEvent: LiveEvent;
   onStart: (liveEvent: LiveEvent) => void;
   onEnd: (liveEvent: LiveEvent) => void;
+  onExit: (liveEvent: LiveEvent) => void;
   onSettings: (liveEvent: LiveEvent) => void;
 }
 
@@ -22,6 +23,7 @@ export default function ControlBar(props: ControlBarProps) {
     liveEvent,
     onStart,
     onEnd,
+    onExit,
     onSettings,
   } = props;
 
@@ -89,6 +91,9 @@ export default function ControlBar(props: ControlBarProps) {
         }
         {
           ongoing && <Duration liveEvent={liveEvent} />
+        }
+        {
+          !ongoing && <div className="control-bar__exit-live" onClick={() => { onExit(liveEvent) }}>{stringSet.LIVE_EVENT_EXIT_BUTTON}</div>
         }
         {
           ongoing
