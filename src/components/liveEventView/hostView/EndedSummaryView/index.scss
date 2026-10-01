@@ -1,0 +1,52 @@
+.ended-summary-view {
+  width: 480px;
+  padding: 18px 24px;
+  background: #333;
+  color: #fff;
+
+  .header {
+    display: flex;
+    align-items: center;
+
+    .title {
+      flex: 1;
+      font-size: 18px;
+    }
+    .close:hover {
+      cursor: pointer;
+    }
+  }
+  .summary {
+    padding-top: 24px;
+
+    &__item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+
+      .label {
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .value {
+        font-weight: 600;
+      }
+    }
+  }
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    padding-top: 32px;
+
+    .major-button {
+      padding: 10px 16px;
+      border-radius: 4px;
+      background-color: #742ddd;
+
+      &:hover {
+        cursor: pointer;
+        opacity: 0.9;
+      }
+    }
+  }
+}
