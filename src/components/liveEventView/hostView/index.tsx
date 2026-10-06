@@ -11,6 +11,7 @@ import ConfirmEndDialog from "../../ConfirmEndDialog";
 import RightPanel from '../../RightPanel';
 import { SendbirdLiveContext } from "../../../lib/sendbirdLiveContext";
 import Settings from "./Settings";
+import EndedSummaryView from "./EndedSummaryView";
 
 // Kept as a sample reference for browser detection.
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -41,6 +42,12 @@ export default function HostView(props: HostViewProps) {
   const [participantCount, setParticipantCount] = useState(liveEvent.participantCount || 0);
   const [EndModal, openEndModal, closeEndModal] = useModal('', 'dark-background');
   const [SettingsModal, openSettingsModal, closeSettingsModal] = useModal('');
+  const [SummaryModal, openSummaryModal, closeSummaryModal] = useModal('', 'dark-background');
+  // Set while this host is ending the event, so the `liveEventEnded` / `exited` events it triggers
+  // don't close the view before the summary dialog is shown.
+  const isEndingByMe = useRef(false);
+  // The terminal event suppressed while ending, replayed if `endEvent()` fails afterwards.
+  const suppressedEvent = useRef<'liveEventEnded' | 'exited' | null>(null);
 
   const getWindowDimensions = () => {
     const { innerWidth: width, innerHeight: height } = window;
@@ -117,6 +124,10 @@ export default function HostView(props: HostViewProps) {
       }),
       liveEvent.on('liveEventEnded', () => {
         setState(liveEvent.state);
+        if (isEndingByMe.current) {
+          suppressedEvent.current = 'liveEventEnded';
+          return;
+        }
         onClose(liveEvent);
       }),
       liveEvent.on('participantCountChanged', (liveEvent, participantCountInfo) => {
@@ -127,6 +138,10 @@ export default function HostView(props: HostViewProps) {
         setCoverUrl(liveEvent.coverUrl);
       }),
       liveEvent.on('exited', () => {
+        if (isEndingByMe.current) {
+          suppressedEvent.current ??= 'exited';
+          return;
+        }
         onClose(liveEvent);
       }),
       liveEvent.on('hostEntered', () => {
@@ -242,11 +257,37 @@ export default function HostView(props: HostViewProps) {
         <EndModal>
           <ConfirmEndDialog
             onExit={async (isEnding) => {
+              // Ignore repeated clicks while an end request is in flight (or has already succeeded).
+              if (isEndingByMe.current) return;
+
               if (isEnding) {
-                await liveEvent.endEvent();
-              } else {
-                await liveEvent.exitAsHost();
+                isEndingByMe.current = true;
+                suppressedEvent.current = null;
+                try {
+                  await liveEvent.endEvent();
+                } catch (e) {
+                  // The event may have ended or exited anyway; don't leave the view stuck open.
+                  if (suppressedEvent.current === 'liveEventEnded') {
+                    // Keep suppressing, so a later `exited` doesn't dismiss the summary.
+                    closeEndModal();
+                    openSummaryModal();
+                    return;
+                  }
+                  isEndingByMe.current = false;
+                  if (suppressedEvent.current === 'exited') {
+                    closeEndModal();
+                    onClose(liveEvent);
+                    return;
+                  }
+                  throw e;
+                }
+
+                closeEndModal();
+                openSummaryModal();
+                return;
               }
+
+              await liveEvent.exitAsHost();
 
               closeEndModal();
               onClose(liveEvent);
@@ -256,6 +297,15 @@ export default function HostView(props: HostViewProps) {
             }}
           />
         </EndModal>
+        <SummaryModal>
+          <EndedSummaryView
+            liveEvent={liveEvent}
+            onClose={() => {
+              closeSummaryModal();
+              onClose(liveEvent);
+            }}
+          />
+        </SummaryModal>
         <SettingsModal>
           <Settings liveEvent={liveEvent} onClose={() => {
             closeSettingsModal();
