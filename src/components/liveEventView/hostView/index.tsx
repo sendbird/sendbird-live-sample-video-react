@@ -40,6 +40,11 @@ export default function HostView(props: HostViewProps) {
   const [coverUrl, setCoverUrl] = useState(liveEvent.coverUrl);
   const [state, setState] = useState(liveEvent.state);
   const [participantCount, setParticipantCount] = useState(liveEvent.participantCount || 0);
+  const [ready, setReady] = useState(false);
+  // Counts in-flight setup runs; StrictMode replays the mount effect, so two can overlap.
+  const pendingSetups = useRef(0);
+  const [exiting, setExiting] = useState(false);
+  const exitingRef = useRef(false);
   const [EndModal, openEndModal, closeEndModal] = useModal('', 'dark-background');
   const [SettingsModal, openSettingsModal, closeSettingsModal] = useModal('');
   const [SummaryModal, openSummaryModal, closeSummaryModal] = useModal('', 'dark-background');
@@ -97,20 +102,28 @@ export default function HostView(props: HostViewProps) {
 
   useEffect(() => {
     const setup = async () => {
-      if (liveEvent.state === LiveEventState.CREATED) {
-        try {
-          await liveEvent.setEventReady();
-        } catch (e) {}
-      }
+      pendingSetups.current += 1;
+      setReady(false);
+      try {
+        if (liveEvent.state === LiveEventState.CREATED) {
+          try {
+            await liveEvent.setEventReady();
+          } catch (e) {}
+        }
 
-      if (
-        liveEvent.state === LiveEventState.ONGOING
-        || liveEvent.state === LiveEventState.READY
-      ) {
-        await liveEvent.startStreaming({ turnVideoOn: true, turnAudioOn: true });
-      }
+        if (
+          liveEvent.state === LiveEventState.ONGOING
+          || liveEvent.state === LiveEventState.READY
+        ) {
+          await liveEvent.startStreaming({ turnVideoOn: true, turnAudioOn: true });
+        }
 
-      setHosts([...liveEvent.hosts]);
+        setHosts([...liveEvent.hosts]);
+      } finally {
+        // Exit stays disabled until every setup run settles, so it can't race setEventReady()/startStreaming().
+        pendingSetups.current -= 1;
+        setReady(pendingSetups.current === 0);
+      }
     }
 
     setup();
@@ -243,12 +256,28 @@ export default function HostView(props: HostViewProps) {
         </div>
         <ControlBar
           liveEvent={liveEvent}
+          exitDisabled={!ready}
+          exiting={exiting}
           onStart={(liveEvent) => {
             setHosts([...liveEvent.hosts]);
             setState(liveEvent.state);
           }}
           onEnd={() => {
             openEndModal();
+          }}
+          onExit={async () => {
+            // Block repeated Exit and Start while exitAsHost() is in flight; re-enable only if it fails.
+            if (exitingRef.current) return;
+            exitingRef.current = true;
+            setExiting(true);
+            try {
+              await liveEvent.exitAsHost();
+            } catch (e) {
+              exitingRef.current = false;
+              setExiting(false);
+              throw e;
+            }
+            onClose(liveEvent);
           }}
           onSettings={() => {
             openSettingsModal();
